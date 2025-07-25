@@ -1,0 +1,48 @@
+---
+import Footer from '../components/Footer.astro';
+import LayoutCommon from './LayoutCommon.astro';
+import NavBarStacked from './NavBarStacked.astro';
+---
+
+<LayoutCommon>
+	<NavBarStacked />
+
+	<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+		<div
+			id="main-content"
+			class="relative w-full max-w-screen-2xl mx-auto h-full overflow-y-auto bg-gray-50 dark:bg-gray-900 min-h-screen"
+		>
+			<div class="px-4 pt-6 2xl:px-0">
+				<slot />
+			</div>
+
+			<Footer
+      logoSrc="/assets/logo.svg"
+      description="Empowering learning through interactive virtual labs and curriculum-aligned activities."
+      quickLinks={[
+        { label: "Home", href: "/" },
+        { label: "About", href: "/about" },
+        { label: "Contact", href: "/contact" },
+        { label: "Pricing", href: "/pricing" },
+      ]}
+      resources={[
+        { label: "Blog", href: "#" },
+        { label: "FAQs", href: "#" },
+        { label: "Support", href: "#" },
+        { label: "Terms of Service", href: "#" },
+      ]}
+      contactInfo={{
+        address: "123 Learning Street, Education City, EC 12345",
+        email: "support@example.com",
+        phone: "+1 (555) 123-4567",
+      }}
+      socialLinks={[
+        { icon: "facebook", href: "#" },
+        { icon: "twitter", href: "#" },
+        { icon: "instagram", href: "#" },
+      ]}
+      bgColor="bg-blue-50 dark:bg-blue-900"
+    />
+		</div>
+	</div>
+</LayoutCommon>

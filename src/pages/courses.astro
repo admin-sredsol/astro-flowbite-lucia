@@ -1,0 +1,128 @@
+---
+import LayoutStacked from "@/layouts/LayoutStacked.astro";
+import Hero from "@/components/Hero.astro";
+import CardWithImage from "@/components/CardWithImage.astro";
+---
+
+<LayoutStacked>
+    <Hero
+    id="hero-course"
+    title="ILS Courses"
+    subtitle="Explore our interactive learning courses."
+    buttonLabel="Explore Mathematics"
+    buttonHref="#maths"
+    secondaryButtonLabel="Explore Science"
+    secondaryButtonHref="#science"
+    bgColor="bg-blue-50 dark:bg-blue-900"
+    animationSrc="/animations/hero-index.json"
+  />
+  <section id="maths" class="bg-gray-100 dark:bg-gray-900 py-16">
+    <div class="container mx-auto px-6 lg:px-20">
+      <!-- Page Title -->
+      <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-12">
+        Dive into the World of Interactive Mathematics
+      </h1>
+
+      <!-- First Row of Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <CardWithImage
+          id="course-1"
+          imageSrc="/assets/course1.svg"
+          title="Course 1"
+          description="Explore the fundamentals of interactive learning."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-1"
+        />
+        <CardWithImage
+          id="course-2"
+          imageSrc="/assets/course2.svg"
+          title="Course 2"
+          description="Dive deeper into advanced topics and techniques."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-2"
+        />
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <CardWithImage
+          id="course-3"
+          imageSrc="/assets/course3.svg"
+          title="Course 3"
+          description="Master the art of collaborative learning."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-3"
+        />
+        <CardWithImage
+          id="course-4"
+          imageSrc="/assets/course4.svg"
+          title="Course 4"
+          description="Learn through playful and explorative methods."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-4"
+        />
+        <CardWithImage
+          id="course-5"
+          imageSrc="/assets/course5.svg"
+          title="Course 5"
+          description="Discover the joy of thoughtful learning."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-5"
+        />
+    </div>
+</div>
+</section>
+    <section id="science" class="bg-gray-100 dark:bg-gray-900 py-16">
+        <div class="container mx-auto px-6 lg:px-20">
+          <!-- Page Title -->
+          <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-12">
+            Engage yourself with Interactive Science
+          </h1>
+      <!-- Second Row of Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <CardWithImage
+          id="course-6"
+          imageSrc="/assets/course6.svg"
+          title="Course 6"
+          description="Interactive learning for beginners."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-6"
+        />
+        <CardWithImage
+          id="course-7"
+          imageSrc="/assets/course7.svg"
+          title="Course 7"
+          description="Advanced techniques for interactive learning."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-7"
+        />
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <CardWithImage
+          id="course-8"
+          imageSrc="/assets/course8.svg"
+          title="Course 8"
+          description="Collaborative learning strategies."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-8"
+        />
+        <CardWithImage
+          id="course-9"
+          imageSrc="/assets/course9.svg"
+          title="Course 9"
+          description="Playful and joyful learning experiences."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-9"
+        />
+        <CardWithImage
+          id="course-10"
+          imageSrc="/assets/course10.svg"
+          title="Course 10"
+          description="Explorative and thoughtful learning."
+          buttonLabel="Learn More"
+          buttonHref="/courses/course-10"
+        />
+      </div>
+    </div>
+  </section>
+</LayoutStacked>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>

@@ -1,0 +1,16 @@
+---
+import DashboardLayout from "@/layouts/DashboardLayout.astro";
+import UserTable  from "@/components/UserTable.astro"
+import SessionTable from "@/components/SessionTable.astro"
+---
+
+<DashboardLayout>
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+    Welcome to Your Dashboard
+  </h1>
+  <p class="text-gray-700 dark:text-gray-300">
+    Here you can manage your account, view analytics, and customize your settings.
+  </p>
+  <UserTable />
+  <SessionTable />
+</DashboardLayout>
