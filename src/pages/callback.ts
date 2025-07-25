@@ -1,5 +1,5 @@
 import { lucia } from "@/lib/auth/lucia";
-import { getLogtoClient, codeVerifier } from "@/lib/auth/client";
+import { getLogtoClient } from "@/lib/auth/client";
 import { OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
 import { db } from "@/lib/db/index";
@@ -20,6 +20,12 @@ export async function GET(context: APIContext): Promise<Response> {
   }
 
   try {
+    const codeVerifier = context.cookies.get("logto_oauth_code_verifier")?.value ?? null;
+    if (!codeVerifier) {
+      return new Response(null, {
+        status: 400,
+      });
+    }
     const { access_token, refresh_token } = await getLogtoClient(
       context.url.origin
     ).validateAuthorizationCode(code, {
@@ -55,6 +61,8 @@ export async function GET(context: APIContext): Promise<Response> {
 
     await db.insert(userTable).values({
       id: userId,
+      name: response?.name ?? "",
+      email: response?.email ?? "",
       logtoId: response?.sub,
     });
 

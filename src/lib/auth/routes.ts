@@ -1,0 +1,1 @@
+export const protectedRoutes = ["/courses/course-1","/courses/course-2", "/courses/course-3", "/courses/course-4", "/protected", "/dashboard", "/settings"];

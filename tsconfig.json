@@ -4,9 +4,12 @@
     "allowJs": true,
     "module": "ESNext",
     "target": "ESNext",
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   }
 }

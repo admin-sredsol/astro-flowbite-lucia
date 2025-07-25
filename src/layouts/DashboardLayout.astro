@@ -1,0 +1,119 @@
+---
+// filepath: /src/layouts/DashboardLayout.astro
+import { asset } from "../lib/data.js";
+import LayoutCommon from "./LayoutCommon.astro";
+import ColorModeSwitcher from "../components/ColorModeSwitcher.astro";
+import SignOutButton from "../components/SignOutButton.astro"; // Reusable logout button
+---
+<LayoutCommon>
+<nav class="fixed z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center">
+          <img
+            src={asset("logo.svg")}
+            class="h-8 mr-3"
+            alt="sredsol Logo"
+          />
+          <span class="text-xl font-bold text-gray-900 dark:text-white">
+            Sredsol
+          </span>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex space-x-8">
+        <a
+          href="/dashboard"
+          class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+        >
+          Dashboard
+        </a>
+        <a
+          href="/dashboard/settings"
+          class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+        >
+          Settings
+        </a>
+        <a
+          href="/dashboard/analytics"
+          class="text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+        >
+          Analytics
+        </a>
+      </div>
+
+      <!-- Right Side: Theme Switcher and Logout -->
+      <div class="flex items-center space-x-4">
+        <ColorModeSwitcher />
+        <SignOutButton />
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        data-collapse-toggle="mobile-menu"
+        type="button"
+        class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="w-6 h-6"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="hidden md:hidden" id="mobile-menu">
+    <ul class="flex flex-col space-y-2 px-4 py-4">
+      <li>
+        <a
+          href="/dashboard"
+          class="block text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+        >
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a
+          href="/dashboard/settings"
+          class="block text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+        >
+          Settings
+        </a>
+      </li>
+      <li>
+        <a
+          href="/dashboard/analytics"
+          class="block text-sm font-medium text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-500"
+        >
+          Analytics
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Content Area -->
+<main class="pt-20 sm:pt-24 bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <div class="container mx-auto px-6 lg:px-20 py-8">
+    <slot /> <!-- Slot for dashboard-specific content -->
+  </div>
+</main>
+</LayoutCommon>

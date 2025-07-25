@@ -1,0 +1,73 @@
+---
+// filepath: /src/components/SessionTable.astro
+import { db } from "@/lib/db/index";
+import { sessionTable, userTable } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
+
+// Fetch session details
+const userSessions = await db
+  .select({
+    sessionId: sessionTable.id,
+    userId: sessionTable.userId,
+    userLogtoId: userTable.logtoId,
+    sessionExpiresAt: sessionTable.expiresAt,
+    sessionCreatedAt: sessionTable.createdAt,
+    sessionUpdatedAt: sessionTable.updatedAt,
+  })
+  .from(sessionTable)
+  .leftJoin(userTable, eq(sessionTable.userId, userTable.id));
+---
+
+<section class="overflow-x-auto bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">User Sessions</h2>
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full border-collapse border border-gray-300 dark:border-gray-700">
+      <thead>
+        <tr class="bg-gray-100 dark:bg-gray-800">
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Session ID
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            User ID
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Logto ID
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Expires At
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Created At
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Updated At
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {userSessions.map((session) => (
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {session.sessionId}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {session.userId}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {session.userLogtoId}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {new Date(session.sessionExpiresAt).toLocaleString()}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {session.sessionCreatedAt ? new Date(session.sessionCreatedAt).toLocaleString() : 'Invalid Date'}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {session.sessionUpdatedAt ? new Date(session.sessionUpdatedAt).toLocaleString() : 'Invalid Date'}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

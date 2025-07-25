@@ -1,0 +1,50 @@
+---
+// filepath: /src/components/UserTable.astro
+import { db } from "@/lib/db/index";
+import { userTable } from "@/lib/db/schema";
+
+// Fetch user details
+const users = await db.select().from(userTable);
+---
+
+<section class="overflow-x-auto bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">User Details</h2>
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full border-collapse border border-gray-300 dark:border-gray-700">
+      <thead>
+        <tr class="bg-gray-100 dark:bg-gray-800">
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            ID
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Logto ID
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Created At
+          </th>
+          <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+            Updated At
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user) => (
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {user.id}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {user.logtoId}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {user.createdAt ? new Date(user.createdAt).toLocaleString() : "Invalid Date"}
+            </td>
+            <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-gray-300">
+              {user.updatedAt ? new Date(user.updatedAt).toLocaleString() : "Invalid Date"}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

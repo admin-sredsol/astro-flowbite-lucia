@@ -1,0 +1,98 @@
+---
+export interface Props {
+  actionUrl?: string;
+  label?: string;
+  className?: string; // Allow custom classes for styling
+}
+
+const { actionUrl = "/auth/logout", label = "Sign Out", className = "" } = Astro.props;
+---
+
+<div>
+  <!-- Sign Out Button -->
+  <button
+    id="signout-button"
+    onclick="toggleModal()"
+    class={`px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg shadow-md hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 transition duration-300 ${className}`}
+  >
+    {label}
+  </button>
+
+  <!-- Confirmation Modal -->
+  <div
+    id="signout-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 overflow-y-auto overflow-x-hidden"
+  >
+    <div class="relative w-full max-w-md h-auto">
+      <!-- Modal Content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+        <!-- Modal Header -->
+        <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Confirm Sign Out
+          </h3>
+          <button
+            type="button"
+            onclick="toggleModal()"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6">
+          <p class="text-sm text-gray-500 dark:text-gray-300">
+            Are you sure you want to sign out?
+          </p>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="flex items-center justify-end p-6 space-x-4 border-t border-gray-200 rounded-b dark:border-gray-700">
+          <!-- Cancel Button -->
+          <button
+            onclick="toggleModal()"
+            type="button"
+            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+          >
+            Cancel
+          </button>
+          <!-- Confirm Button -->
+          <form method="POST" action={actionUrl}>
+            <button
+              type="submit"
+              class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800"
+            >
+              Confirm
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Client-side state for modal visibility
+  let showModal = false;
+
+  // Function to toggle the modal visibility
+  function toggleModal() {
+    showModal = !showModal;
+    const modal = document.getElementById("signout-modal");
+    if (modal) {
+      modal.style.display = showModal ? "flex" : "none";
+    }
+  }
+</script>
